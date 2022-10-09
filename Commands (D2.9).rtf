@@ -1,0 +1,276 @@
+{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang1033 >>> u1 = User.objects.create_user(username='Michael')\par
+>>> u1\par
+<User: Michael>\par
+>>> u2 = User.objects.create_user(username='Natalia')\par
+>>> u2\par
+<User: Natalia>\par
+>>> Author.objects.create(authorUser=u1) \par
+<Author: Author object (1)>\par
+>>> Author.objects.create(authorUser=u2) \par
+<Author: Author object (2)>\par
+>>> Category.objects.create(name='IT')\par
+<Category: Category object (1)>\par
+>>> Category.objects.create(name='WL')\par
+<Category: Category object (2)>\par
+>>> Category.objects.create(name='IN')\par
+<Category: Category object (3)>\par
+>>> Category.objects.create(name='CL')\par
+<Category: Category object (4)>\par
+>>> author = Author.objects.get(id=1)\par
+\f1\lang1049 >>> Post.objects.create(author=author, categoryType='NW', title='\'cd\'ee\'e2\'ee\'f1\'f2\'e8 IT', text='\'d2\'e5\'eb\'e5\'f4\'ee\'ed\'ed\'fb\'e9 \'f1\'ef\'e0\'ec \'e8 \'f7\'f2\'ee \'f1 \'fd\'f2\'e8\'ec \'e4\'e5\'eb\'e0\'f2\'fc')\par
+<Post: Post object (1)>\par
+>>> Post.objects.create(author=author, categoryType='AR', title='\'d2\'e5\'f5\'ed\'ee\'eb\'ee\'e3\'e8\'e8', text='\'d0\'ee\'e1\'ee\'f2\'fb \'e8 \'f2\'e5\'f5\'ed\'ee\'eb\'ee\'e3\'e8\'e8 \'e1\'f3\'e4\'f3\'f9\'e5\'e3\'ee')\par
+<Post: Post object (2)>\par
+>>> Post.objects.create(author=author, categoryType='AR', title='\'cc\'f3\'e7\'fb\'ea\'e0', text='\'ca\'e0\'ea \'e2\'fb\'e1\'f0\'e0\'f2\'fc \'e3\'eb\'fe\'ea\'ee\'f4\'ee\'ed')\par
+<Post: Post object (3)>\par
+>>> Post.objects.get(id=3).text\par
+'\'ca\'e0\'ea \'e2\'fb\'e1\'f0\'e0\'f2\'fc \'e3\'eb\'fe\'ea\'ee\'f4\'ee\'ed'\par
+>>> Post.objects.create(author=author, categoryType='AR', categoryType='NW',  title='\'cc\'f3\'e7\'fb\'ea\'e0', text='\'c7\'e5\'ec\'f4\'e8\'f0\'e0 \'e2\'fb\'ef\'f3\'f1\'f2\'e8\'eb\'e0 \'ed\'ee\'e2\'fb\'e9 \'e0\'eb\'fc\'e1\'ee\'ec')\par
+>>> Post.objects.get(id=2).postCategory.add(Category.objects.get(id=2))\par
+>>> Post.objects.get(id=3).postCategory.add(Category.objects.get(id=1))\par
+>>> Comment.objects.create(commentPost=Post.objects.get(id=1), commentUser=Author.objects.get(id=1).authorUser, text='\'ce\'f2\'eb\'e8\'f7\'ed\'fb\'e5 \'ed\'ee\'e2\'ee\'f1\'f2\'e8!') \par
+<Comment: Comment object (1)>\par
+>>> Comment.objects.create(commentPost=Post.objects.get(id=1), commentUser=Author.objects.get(id=1).authorUser, text='\'d5\'ee\'f0\'ee\'f8\'e0\'ff \'ed\'ee\'e2\'ee\'f1\'f2\'fc')\par
+<Comment: Comment object (2)>\par
+>>> Comment.objects.create(commentPost=Post.objects.get(id=2), commentUser=Author.objects.get(id=2).authorUser, text='\'c1\'f3\'e4\'f3\'f9\'e5\'e5 \'ed\'e0\'f1\'f2\'f3\'ef\'e8\'eb\'ee')\par
+<Comment: Comment object (3)>\par
+>>> Comment.objects.create(commentPost=Post.objects.get(id=2), commentUser=Author.objects.get(id=2).authorUser, text='\'ce\'f2\'eb\'e8\'f7\'ed\'e0\'ff \'f1\'f2\'e0\'f2\'fc\'ff!')\par
+<Comment: Comment object (4)>\par
+>>> Comment.objects.create(commentPost=Post.objects.get(id=3), commentUser=Author.objects.get(id=2).authorUser, text='\'cf\'ee\'eb\'e5\'e7\'ed\'e0\'ff \'f1\'f2\'e0\'f2\'fc\'ff \'e4\'eb\'ff \'ed\'e0\'f7\'e8\'ed\'e0\'fe\'f9\'e8\'f5')\par
+<Comment: Comment object (5)>\par
+>>> Comment.objects.create(commentPost=Post.objects.get(id=3), commentUser=Author.objects.get(id=1).authorUser, text='\'c8\'ed\'f2\'e5\'f0\'e5\'f1\'ed\'ee!')\par
+<Comment: Comment object (6)>\par
+>>> Comment.objects.get(id=1).like()\par
+>>> Comment.objects.get(id=1).like()\par
+>>> Comment.objects.get(id=1).like()\par
+>>> Comment.objects.get(id=1).like()\par
+>>> Comment.objects.get(id=1).like()\par
+>>> Comment.objects.get(id=1).like()\par
+>>> Comment.objects.get(id=2).like()\par
+>>> Comment.objects.get(id=2).like()\par
+>>> Comment.objects.get(id=2).like()\par
+>>> Comment.objects.get(id=2).like()\par
+>>> Comment.objects.get(id=2).like()\par
+>>> Comment.objects.get(id=1).like()\par
+>>> Comment.objects.get(id=1).rating\par
+7\par
+>>> Comment.objects.get(id=2).rating \par
+5\par
+>>> Author.objects.get(id=1)\par
+<Author: Author object (1)>\par
+>>> a=Author.objects.get(id=1)\par
+>>> a.ratingAuthor\par
+0\par
+>>> a.update_rating()\par
+>>> a.ratingAuthor\par
+12\par
+>>> Comment.objects.get(id=1).dislike()\par
+>>> Comment.objects.get(id=1).dislike()\par
+>>> Comment.objects.get(id=1).dislike()\par
+>>> Comment.objects.get(id=2).dislike()\par
+>>> Comment.objects.get(id=2).dislike()\par
+>>> Comment.objects.get(id=2).dislike()\par
+>>> Comment.objects.get(id=2).dislike()\par
+>>> a.update_rating()\par
+>>> a.ratingAuthor\par
+5\par
+>>> author2 = Author.objects.get(id=2)\par
+>>> author2\par
+<Author: Author object (2)>\par
+>>> author2.authorUser\par
+<User: Natalia>\par
+>>> Post.objects.update(author=author2)\par
+3\par
+>>> Post.objects.create(author=author2, categoryType='NW', title='\'cd\'ee\'e2\'e8\'ed\'ea\'e8', text='\'c7\'e5\'ec\'f4\'e8\'f0\'e0 \'e2\'fb\'ef\'f3\'f1\'f2\'e8\'eb\'e0 \'ed\'ee\'e2\'fb\'e9 \'e0\'eb\'fc\'e1\'ee\'ec')\par
+<Post: Post object (4)>\par
+>>> Post.objects.get(id=4).postCategory.add(Category.objects.get(id=1))\par
+>>> Comment.objects.create(commentPost=Post.objects.get(id=4), commentUser=Author.objects.get(id=2).authorUser, text='\'d3\'f0\'e0!')\par
+<Comment: Comment object (7)>\par
+>>> Comment.objects.get(id=7).like()\par
+>>> Comment.objects.get(id=7).like()\par
+>>> Comment.objects.get(id=7).like()\par
+>>> Comment.objects.get(id=7).like()\par
+>>> Comment.objects.get(id=7).like()\par
+>>> Comment.objects.get(id=6).like()\par
+>>> Comment.objects.get(id=6).like()\par
+>>> Comment.objects.get(id=6).like()\par
+>>> Comment.objects.get(id=4).like()\par
+>>> Comment.objects.get(id=4).like()\par
+>>> Comment.objects.get(id=4).like()\par
+>>> Comment.objects.get(id=4).like()\par
+>>> Comment.objects.get(id=5).like() \par
+>>> Comment.objects.get(id=5).like() \par
+>>> Comment.objects.get(id=5).like()\par
+>>> Comment.objects.get(id=5).like()\par
+>>> Comment.objects.get(id=7).like()\par
+>>> Comment.objects.get(id=7).like()\par
+>>> Comment.objects.get(id=7).like()\par
+>>> Comment.objects.get(id=7).like()\par
+>>> Comment.objects.get(id=3).dislike()  \par
+>>> Comment.objects.get(id=3).dislike()\par
+>>> Comment.objects.get(id=3).dislike()\par
+>>> Comment.objects.get(id=4).dislike()\par
+>>> Comment.objects.get(id=5).dislike() \par
+>>> Comment.objects.get(id=4).dislike()\par
+>>> Comment.objects.get(id=1).rating \par
+4\par
+>>> Comment.objects.get(id=7).rating \par
+9\par
+>>> Comment.objects.get(id=6).rating \par
+3\par
+>>> Comment.objects.get(id=2).rating \par
+1\par
+>>> Comment.objects.get(id=3).rating \par
+-3\par
+>>> Comment.objects.get(id=4).rating \par
+2\par
+>>> Comment.objects.get(id=5).rating \par
+3\par
+>>> a2=Author.objects.get(id=2)\par
+>>> a2.update_rating() \par
+>>> a.ratingAuthor\par
+5\par
+>>> a2.ratingAuthor \par
+11\par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=2).like() \par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=2).like()\par
+>>> Post.objects.get(id=2).like()\par
+>>> Post.objects.get(id=2).like()\par
+>>> Post.objects.get(id=2).like()\par
+>>> Post.objects.get(id=2).like()\par
+>>> Post.objects.get(id=3).like() \par
+>>> Post.objects.get(id=3).like()\par
+>>> Post.objects.get(id=3).like()\par
+>>> Post.objects.get(id=3).like()\par
+>>> Post.objects.get(id=3).like()\par
+>>> Post.objects.get(id=3).like()\par
+>>> Post.objects.get(id=4).like() \par
+>>> Post.objects.get(id=4).like() \par
+>>> Post.objects.get(id=4).like() \par
+>>> Post.objects.get(id=4).like() \par
+>>> Post.objects.get(id=4).like() \par
+>>> Post.objects.get(id=1).like()  \par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=1).dislike()\par
+>>> Post.objects.get(id=1).dislike()\par
+>>> Post.objects.get(id=3).dislike()\par
+>>> Post.objects.get(id=4).dislike()\par
+>>> Post.objects.get(id=4).dislike()\par
+>>> Post.objects.get(id=1).like()\par
+>>> a2.ratingAuthor\par
+11\par
+>>> a.ratingAuthor  \par
+5\par
+>>> a = Author.objects.order_by('-ratingAuthor')\par
+>>> a = Author.objects.order_by('-ratingAuthor')[:1]\par
+>>> a\par
+<QuerySet [<Author: Author object (2)>]>\par
+>>> a2\par
+<Author: Author object (2)>\par
+>>> a2.ratingAuthor\par
+11\par
+>>> for i in a:\par
+...     i.ratingAuthor\par
+...     i.authorUser.username\par
+...\par
+11\par
+'Natalia'\par
+>>> a=Author.objects.get(id=1)\par
+>>> Comment.objects.get(id=3).like()\par
+>>> Comment.objects.get(id=3).like()\par
+>>> Comment.objects.get(id=3).like()\par
+>>> Comment.objects.get(id=3).like()\par
+>>> a2.update_rating() \par
+>>> u1 = Author.objects.get(pk=1)\par
+>>> u1.authorUser.comment_set.all()\par
+<QuerySet [<Comment: Comment object (1)>, <Comment: Comment object (2)>, <Comment: Comment object (6)>]>\par
+>>> Comment.objects.create(commentPost=Post.objects.get(id=3), commentUser=Author.objects.get(id=1).authorUser, text='\'c8\'ed\'f2\'e5\'f0\'e5\'f1\'ed\'ee!')\par
+<Comment: Comment object (8)>\par
+>>> a.ratingAuthor\par
+5\par
+>>> a2.update_rating()\par
+>>> a2.update_rating()\par
+>>> a.ratingAuthor\par
+5\par
+>>> a2.ratingAuthor\par
+93\par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=1).like()\par
+>>> Comment.objects.get(id=1).like()\par
+>>> Comment.objects.get(id=1).like()\par
+>>> Comment.objects.get(id=6).like()\par
+>>> Post.objects.get(id=1).like()\par
+>>> Post.objects.get(id=2).like()\par
+>>> Post.objects.get(id=2).like()\par
+>>> Post.objects.get(id=2).like()\par
+>>> Post.objects.get(id=2).like()\par
+>>> a.ratingAuthor\par
+5\par
+>>> a = Author.objects.get(id=1)\par
+>>> a.post_set.values('rating')\par
+<QuerySet []>\par
+>>> a.authorUser.comment_set.values('rating')\par
+<QuerySet [\{'rating': 6\}, \{'rating': 1\}, \{'rating': 4\}, \{'rating': 0\}]>\par
+>>> Post.objects.create(author=author, categoryType='NW', title='\'cd\'ee\'e2\'e8\'ed\'ea\'e8', text='\'c7\'e5\'ec\'f4\'e8\'f0\'e0 \'e2\'fb\'ef\'f3\'f1\'f2\'e8\'eb\'e0 \'ed\'ee\'e2\'fb\'e9 \'e0\'eb\'fc\'e1\'ee\'ec')\par
+<Post: Post object (5)>\par
+>>> Post.objects.create(author=author, categoryType='AR', title='\'d1\'ec\'e0\'f0\'f2\'f4\'ee\'ed\'fb', text='Google \'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'e8\'eb\'e0 \'ed\'ee\'e2\'fb\'e5 \'f1\'ec\'e0\'f0\'f2\'f4\'ee\'ed\'fb Pixel 7')\par
+<Post: Post object (6)>\par
+>>> Post.objects.get(id=5).postCategory.add(Category.objects.get(id=1))\par
+>>> Post.objects.get(id=6).postCategory.add(Category.objects.get(id=1))\par
+>>> Comment.objects.create(commentPost=Post.objects.get(id=5), commentUser=Author.objects.get(id=2).authorUser, text='\'d5\'ee\'f0\'ee\'f8\'e0\'ff \'ed\'ee\'e2\'ee\'f1\'f2\'fc')\par
+<Comment: Comment object (9)>\par
+>>> Comment.objects.create(commentPost=Post.objects.get(id=6), commentUser=Author.objects.get(id=2).authorUser, text='\'cd\'e0\'ea\'ee\'ed\'e5\'f6-\'f2\'ee!')\par
+<Comment: Comment object (10)>\par
+>>> Comment.objects.create(commentPost=Post.objects.get(id=5), commentUser=Author.objects.get(id=1).authorUser, text='\'cb\'fe\'e1\'ee\'ef\'fb\'f2\'ed\'ee')\par
+<Comment: Comment object (11)>\par
+>>> Comment.objects.create(commentPost=Post.objects.get(id=6), commentUser=Author.objects.get(id=1).authorUser, text='\'cf\'f0\'e5\'ea\'f0\'e0\'f1\'ed\'e0\'ff \'ed\'ee\'e2\'ee\'f1\'f2\'fc')\par
+<Comment: Comment object (12)>\par
+>>> Comment.objects.create(commentPost=Post.objects.get(id=6), commentUser=Author.objects.get(id=1).authorUser, text='\'cf\'f0\'e5\'ea\'f0\'e0\'f1\'ed\'e0\'ff \'ed\'ee\'e2\'ee\'f1\'f2\'fc')\par
+<Comment: Comment object (13)>\par
+>>> Comment.objects.get(id=9).like()\par
+>>> Comment.objects.get(id=9).like()\par
+>>> Comment.objects.get(id=10).like()\par
+>>> Comment.objects.get(id=10).like()\par
+>>> Comment.objects.get(id=11).like()\par
+>>> Comment.objects.get(id=12).like()\par
+>>> a.update_rating()\par
+>>> a.ratingAuthor\par
+13\par
+>>> a2.ratingAuthor\par
+93\par
+>>> a.update_rating\par
+<bound method Author.update_rating of <Author: Author object (1)>>\par
+>>> a.update_rating()\par
+>>> b=Post.objects.order_by('-rating')[0] \par
+>>> b.preview()\par
+'\'d2\'e5\'eb\'e5\'f4\'ee\'ed\'ed\'fb\'e9 \'f1\'ef\'e0\'ec \'e8 \'f7\'f2\'ee \'f1 \'fd\'f2\'e8\'ec \'e4\'e5\'eb\'e0\'f2\'fc...16'\par
+>>> b=Post.objects.order_by('-rating')\par
+>>> b.preview()\par
+Traceback (most recent call last):\par
+  File "<console>", line 1, in <module>\par
+AttributeError: 'QuerySet' object has no attribute 'preview'\par
+>>> b=Post.objects.order_by('-rating')[0]\par
+>>> b.preview()\par
+'\'d2\'e5\'eb\'e5\'f4\'ee\'ed\'ed\'fb\'e9 \'f1\'ef\'e0\'ec \'e8 \'f7\'f2\'ee \'f1 \'fd\'f2\'e8\'ec \'e4\'e5\'eb\'e0\'f2\'fc...16'\par
+>>> bestPost=Post.objects.all().order_by('-rating').values('dateCreation','author__authorUser__username','rating','title','text')[:1]\par
+>>> bestPost\par
+<QuerySet [\{'dateCreation': datetime.datetime(2022, 10, 8, 18, 19, 29, 86248, tzinfo=datetime.timezone.utc), 'author__authorUser__username': 'Natalia', 'rating': 16, 'title': '\'cd\'ee\'e2\'ee\'f1\'f2\'e8 IT', 'text': '\'d2\'e5\'eb\'e5\'f4\'ee\'ed\'ed\'fb\'e9 \'f1\'ef\'e0\'ec \'e8 \'f7\'f2\'ee \'f1 \'fd\'f2\'e8\'ec \'e4\'e5\'eb\'e0\'f2\'fc'\}]>\par
+>>> top_post = Post.objects.order_by('-rating')[0]\par
+>>> top_post.comment_set.all().values('dateCreation', 'commentUser__username', 'rating', 'text')\par
+<QuerySet [\{'dateCreation': datetime.datetime(2022, 10, 8, 18, 56, 38, 242662, tzinfo=datetime.timezone.utc), 'commentUser__username': 'Michael', 'rating': 6, 'text': '\'ce\'f2\'eb\'e8\'f7\'ed\'fb\'e5 \'ed\'ee\'e2\'ee\'f1\'f2\'e8!'\}, \{'dateCreation': datetime.datetime(2022, 10, 8, 19, 0, 28, 895942, tzinfo=datetime.timezone.utc), 'commentUser__username': 'Michael', 'rating': 1, 'text': '\'d5\'ee\'f0\'ee\'f8\'e0\'ff \'ed\'ee\'e2\'ee\'f1\'f2\'fc'\}]>\f0\lang1033\par
+}
+ 
